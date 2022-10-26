@@ -1,0 +1,109 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    list-style: none;
+}
+*{
+    font-family: 'Roboto', sans-serif;
+}
+body{
+    min-height: 100vh;
+    display: grid;
+    place-content: center;
+}
+container{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+    height: 600px;
+    width: 300px;
+    margin: auto;
+    background-color: #243441;
+    border-radius: 25px;
+}
+.display{
+    text-align: right;
+    color: #ed802e;
+    height: 150px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    vertical-align: end;
+    font-size: 50px;
+    padding-right: 20px;
+    padding-top: 50px;
+    padding-left: 20px;
+}
+.history{
+    font-size: 12px;
+    width: 100%;
+    height: 30px;
+    color: grey;
+    display: flex;
+    text-align: right;
+    flex-direction: row-reverse;
+    padding: 0 10px;
+}
+button{
+    width: 55px;
+    height: 55px;
+    border-radius: 12px;
+    background-color: #243441;
+    border:  none;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px;
+    color: grey;
+    margin: 6px;
+    font-size: 15px;
+}
+button:hover{
+    cursor: pointer;
+    box-shadow: #ed802e 0 0 3px 3px;
+}
+button:last-child{
+    color: #ed802e;
+}
+button:last-child:hover, .first-row > button:hover{
+    box-shadow: white 0 0 3px 3px;
+}
+.first-row > button{
+    color: #ed802e;
+}
+.fifth-row button:last-child{
+    width: 122px;
+    background-color: #bd5d13;
+    color: white;
+    
+}
+.fifth-row button:last-child:hover{
+    box-shadow: 0 0 3px 2px white;
+}
+input{
+    border: none;
+    background-color: #243441;
+    border-radius: 25px;
+    border-color: #243441;
+    outline: none; 
+}
+.fifth-row{
+    padding-bottom: 30px;
+}
+button:active{
+    /* background-color: white; */
+    box-shadow: inset #ed802e 0 0 15px 3px;   
+}
+button:last-child:active, .first-row > button:active{
+    box-shadow: inset white 0 0 15px 3px;
+}
+.fifth-row button:last-child:active{
+    box-shadow: inset 0 0 15px 3px white    ;
+}
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+input[type=number] {
+    -moz-appearance: textfield;
+}
