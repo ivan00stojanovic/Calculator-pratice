@@ -42,4 +42,3 @@ buttons.forEach(x => x.addEventListener('click', function click(){
     let num = document.getElementsByClassName('btn').value
         document.getElementsByClassName('display').innerHTML = num;
     } */
-
