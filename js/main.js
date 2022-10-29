@@ -6,43 +6,89 @@ const clear = document.querySelector('.btn-clear-all')
 const equals = document.querySelector('.btn-equals')
 const brisanje = document.querySelector('.btn-brisanje')
 const h2 = document.querySelector('h2')
-
+let historyArr;
+let holder1 = []
+let holder2 = []
+let operatorCounter = 0
 
 
 numbers.forEach(num => num.addEventListener('click', ()=>{
     if(display.value == 0  ){
         display.value = num.innerText
+        holder1.push(Number(num.innerText))
+        operatorCounter++
+    }else if(operatorCounter === 1){
+        display.value = num.innerText
+        holder2.push(Number(num.innerText))
+        operatorCounter++
+    }else if(operatorCounter === 2){
+        holder1 = holder1.join('')
+        holder1 = parseFloat(holder1)
+        holder2 = holder2.join('')
+        holder2 = parseFloat(holder2)
+        holder1 += holder2
+        holder2 = []
     }else if(num.innerText == '.' && display.value[display.value.length -1] === '.'){
         return
     }else{
         display.value += num.innerText 
+        holder1.push(Number(num.innerText))
     }
     reduceFont()
 }))
 operators.forEach(operator => operator.addEventListener('click', ()=>{
     if(display.value == 0 && operator.innerText === '-'){
-            display.value = operator.innerText + ' '
+            display.value = operator.innerText
     }else if(display.value[display.value.length - 1] == operator.innerText){
 
     }else{
-        display.value += ' ' +operator.innerText+ ' '
+        display.value += operator.innerText
     }
+    
+    
+    
     reduceFont()
 }))
 clear.addEventListener('click', ()=>{
     display.value = 0
     display.style.fontSize = '50px'
     h2.classList.add('hidden')
+    history.innerText = ''
 })
 
 brisanje.addEventListener('click', ()=>{
     display.value = display.value.slice(0, display.value.length-1)
     if(display.value.length < 25) h2.classList.add('hidden')
+    if(display.value.length === 0) display.value = 0
+    reduceFont()
 })
 
-equals.addEventListener('click',displayUpdate() )
-function displayUpdate(){  
-}
+equals.addEventListener('click', () =>{
+
+
+
+
+
+
+
+
+
+
+
+    //let holder = 
+    //history.innerText = display.value + "="
+    //historyArr = history.innerText.split('')
+    //for(let i = 0; i < history.innerText.length; i++){
+    //    if(historyArr[i] == operators || historyArr[i] == equals){
+    //                                                              //823+
+    //    }
+    //    if(!isNaN(historyArr[i])){
+    //        historyArr[i] = Number(historyArr[i])
+    //    }
+    //
+    //}
+    //console.log(historyArr)
+})
 
 function reduceFont(){
     if(display.value.length > 24 ){
@@ -53,8 +99,6 @@ function reduceFont(){
         display.style.fontSize = '20px'
     }else if(display.value.length > 9){
         display.style.fontSize = '30px'
-    }else if(display.value.length > 21){
-        display.style.fontSize = '15px'
     }else{
         display.style.fontSize = '50px'
     }
