@@ -46,13 +46,35 @@ container{
     max-width: 100%;
     display: flex;
     flex-direction: row;
-    justify-content: end;
-    align-items: flex-end;
-    font-size: 50px;
-    padding-right: 20px;
-    padding-top: 20px;
-    padding-left: 20px;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: none;
     
+}
+
+.operatorBox{
+    color: #ed802e;
+    font-size: 40px;
+    width: 60px;
+    height: 80%;
+    border: #ed802e 2px solid;
+    border-left: none;
+    border-radius: 5px;
+    text-align: center;
+    vertical-align: center;
+}
+.numbers{
+    color: #ed802e;
+    padding-left: 5px;
+    font-size: 50px;
+    max-width: 80%;
+    width: 480px;
+    height: 100%;
+    padding-right: 20px;
+    text-align: right;
+    -moz-appearance:textfield;
+    -webkit-appearance: none;
+   
 }
 .history{
     font-size: 15px;
@@ -63,8 +85,8 @@ container{
     text-align: right;
     flex-direction: row-reverse;
     align-items: flex-end;
-    padding: 0 20px;
-    margin-top: 20px;
+     padding: 0 20px; 
+     margin-top: 20px; 
 }
 button{
     width: 55px;
