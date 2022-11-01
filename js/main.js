@@ -199,7 +199,7 @@ brisanje.addEventListener('click', ()=>{
     if(operatorCounter >=1 ) holder2.pop()
     symbol = ''
     reduceFont()
-
+//
 })
 
  
