@@ -109,86 +109,114 @@ function reduceFont(){
  let holder2 = []
  let symbol = ''
  let operatorCounter = 0
+ display.value = 0
  
  numbers.forEach(num => num.addEventListener('click', ()=>{
-     if(display.value == 0 || display.value == ''){
-         display.value = num.innerText
-         holder1.push(Number(num.innerText))
+
+     if((display.value == 0 || display.value == '') && operatorCounter == 0){
+
+        display.value = num.innerText
+        holder1.push(Number(num.innerText))
+
      }else if(num.innerText == '.' && display.value[display.value.length -1] === '.'){
          return
-     }else{
-         display.value += num.innerText 
-         holder1.push(Number(num.innerText))
-        
+
+     }else if(operatorCounter == 0 ){
+
+        display.value += num.innerText 
+        holder1.push(Number(num.innerText))
+
+     }else if(operatorCounter == 1){
+
+        display.value += num.innerText
+        holder2.push(Number(num.innerText))
+
+     }else if(operatorCounter >= 2){
+
+        display.value += num.innerText
+        holder2.push(Number(num.innerText))
+
      }
+
      reduceFont()
  }))
  operators.forEach(operator => operator.addEventListener('click', ()=>{
-    console.log(operator)
-     if(display.value == 0 && operator.innerText === '-'){
-            operatorBox.innerText = operator.innerText
-            holder1.push('-')
-     }else if(display.value[display.value.length - 1] == operator.innerText){
-            //display.value[display.value.length -1] == operator.innerText          
-     }else if(holder1.length !== 0 && holder2.length !== 0){
-        if(operator.innerText === 'x'){
-            history.innerText = eval(Number(holder2.join(''))  + symbol + Number(holder1.join('')))
-            symbol = '*'
-            
-            operatorBox.innerText = operator.innerText
-            display.value = ''
-            //display.value = holder2.innerText + '*'
-        }else if(operator.innerText === '÷'){
-            history.innerText = eval(Number(holder2.join(''))  + symbol + Number(holder1.join('')))
-            symbol = '/'
-            display.value = ''
-            
-            operatorBox.innerText = operator.innerText
-        }else{
-        history.innerText = eval(Number(holder2.join(''))  + symbol + Number(holder1.join('')))
+    console.log(history.innerText)
+    if(display.value == 0 && operator.innerText === '-'){        // PRVI KLIK
+           
+        operatorBox.innerText = operator.innerText
+        //operatorCounter++
+        holder1.push('-')
+    }else if(display.value[display.value.length - 1] == operator.innerText){
+
+    }else if(operatorCounter > 0){
+
+        holder1 = (String(eval(Number(holder1.join('')) + symbol + Number(holder2.join(''))))).split('')
+        history.innerText = holder1.join('')
         symbol = operator.innerText
         display.value = ''
         operatorBox.innerText = operator.innerText
-        } 
-     }else{
-         symbol = ''
-         symbol = operator.innerText
-         display.value = ''
-         history.innerText = holder1.join('')
-         holder2 = holder1
-         holder1 = []
-     }
-     holder2 = history.innerText.split('')
-     holder1 = []
-     console.log('holder1 =' +holder1)
-     console.log('holder2 =' +holder2)
-     reduceFont()
- }))
- clear.addEventListener('click', ()=>{
-     
-     holder1 = []
-     holder2 = []
-     display.value = 0
-     display.style.fontSize = '50px'
-     h2.classList.add('hidden')
-     history.innerText = ''
- })
+        operatorCounter++
+        holder2 = []
+
+
+    }else{    // DRUGI KLIK
+    
+        operatorCounter++  
+        history.innerText = eval(Number(holder1.join(''))  + symbol + Number(holder2.join('')))
+        holder2 = []                                        
+        symbol = ''
+        operatorBox.innerText = operator.innerText
+        symbol = operator.innerText
+        display.value = ''
+        
+    }
+    console.log('holder1 = ' +holder1)
+    console.log('holder2 = ' +holder2)
+    reduceFont()
+}))
+
+clear.addEventListener('click', ()=>{
+
+    display.value = 0
+    display.style.fontSize = '50px'
+    h2.classList.add('hidden')
+    history.innerText = ''
+    operatorCounter = 0
+    holder1 = []
+    holder2 = []
+    operatorBox.innerText = ''
+
+})
  
- brisanje.addEventListener('click', ()=>{
-     display.value = display.value.slice(0, display.value.length-1)
-     if(display.value.length < 25) h2.classList.add('hidden')
-     if(display.value.length === 0) display.value = 0
-     operatorBox.innerText = ''
-     reduceFont()
- })
+brisanje.addEventListener('click', ()=>{
+
+    display.value = display.value.slice(0, display.value.length-1)
+    if(display.value.length < 25) h2.classList.add('hidden')
+    if(display.value.length === 0) display.value = 0
+    operatorBox.innerText = ''
+    if(operatorCounter == 0) holder1.pop()
+    if(operatorCounter >=1 ) holder2.pop()
+    symbol = ''
+    reduceFont()
+
+})
 
  
- equals.addEventListener('click', () =>{
-     display.value = eval(Number(holder2.join(''))  + symbol + Number(holder1.join('')))
-     operatorBox.innerText = ''
- })
  
- function reduceFont(){ 
+equals.addEventListener('click', () =>{
+    holder1 = String(eval(Number(holder1.join(''))  + symbol + Number(holder2.join('')))).split('')
+    display.value = eval(Number(holder1.join('')) + symbol + Number(holder2.join('')))
+    operatorBox.innerText = ''
+    history.innerText = ''
+
+    holder2 = []
+    //operatorCounter = 0
+
+})
+ 
+function reduceFont(){ 
+
      if(display.value.length > 23 ){
          h2.classList.remove('hidden')
      }else if(display.value.length > 20){
@@ -200,4 +228,5 @@ function reduceFont(){
      }else{
          display.style.fontSize = '50px'
      }
- }
+
+}

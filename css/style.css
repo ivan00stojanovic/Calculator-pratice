@@ -132,7 +132,6 @@ input{
     padding-bottom: 30px;
 }
 button:active{
-    /* background-color: white; */
     box-shadow: inset #ed802e 0 0 15px 3px;   
 }
 button:last-child:active, .first-row > button:active{
@@ -147,4 +146,4 @@ input::-webkit-inner-spin-button {
   }
 input[type=number] {
     -moz-appearance: textfield;
-}
+} 
