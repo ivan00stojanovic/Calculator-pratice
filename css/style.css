@@ -99,16 +99,19 @@ button{
     color: grey;
     margin: 6px;
     font-size: 15px;
+    transition-duration: 300ms;
 }
 button:hover{
     cursor: pointer;
     box-shadow: #ed802e 0 0 3px 3px;
+    color: white;
 }
 button:last-child{
     color: #ed802e;
 }
 button:last-child:hover, .first-row > button:hover{
     box-shadow: white 0 0 3px 3px;
+    box-shadow: #bd5d13;
 }
 .first-row > button{
     color: #ed802e;
